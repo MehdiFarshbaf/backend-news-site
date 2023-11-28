@@ -6,10 +6,13 @@ const {DataTypes} = Sequelize
 const Category = db.define("category", {
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: {
+            args: false,
+            msg: "نام الزامی است."
+        },
         unique: {
             args: true,
-            message: "مقدار تکراری نباید باشد."
+            msg: "مقدار تکراری نباید باشد."
         }
     }
 })
