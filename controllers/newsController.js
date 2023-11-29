@@ -243,3 +243,20 @@ export const popularNews = async (req, res, next) => {
         next(err)
     }
 }
+
+export const getNewsByCat = async (req, res, next) => {
+    const catId = req.params.cat
+    try {
+        const news = catId ? await News.findAll({
+            where: {catId},
+            order: [["id", "DESC"]]
+        }) : await News.findAll({order: [["id", "DESC"]]})
+
+        res.status(200).json({
+            success: true,
+            news
+        })
+    } catch (err) {
+        next(err)
+    }
+}

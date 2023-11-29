@@ -6,7 +6,7 @@ import {
     deleteNews,
     detailsNews,
     getAllNews,
-    getNews,
+    getNews, getNewsByCat,
     lastNews, popularNews,
     updateNews
 } from "../controllers/newsController.js";
@@ -15,6 +15,7 @@ import {verifyToken} from "../middlewares/verifyToken.js";
 const router = express.Router()
 
 router.get("/last-news", lastNews)
+router.get("/get-news-by-cat/:cat", getNewsByCat)
 router.get("/popular-news", popularNews)
 router.get("/details/:id", detailsNews)
 
