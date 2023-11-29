@@ -1,6 +1,8 @@
 import News from "../models/newsModel.js";
 import * as path from "path";
 import fs from "fs";
+import Category from "../models/categoryModel.js";
+import Users from "../models/userModel.js";
 
 export const getAllNews = async (req, res, next) => {
     try {
@@ -176,9 +178,64 @@ export const lastNews = async (req, res, next) => {
     try {
         const news = await News.findAll({
             limit: 2,
-            order: [["id", "DESC"]]
+            order: [["id", "DESC"]],
+            include: [
+                {
+                    model: Category,
+                    attributes: ["id", "name"]
+                },
+                {
+                    model: Users,
+                    attributes: ["id", "fullName", "email", "firstName", "lastName"]
+                }]
         })
         res.json({
+            success: true,
+            news
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
+export const detailsNews = async (req, res, next) => {
+    const {id} = req.params
+
+    try {
+        const news = await News.findByPk(id, {
+            include: [
+                {
+                    model: Users,
+                    attributes: ["email", "fullName", "firstName", "lastName"]
+                }, {
+                    model: Category,
+                    attributes: ["name"]
+                }
+            ]
+        })
+        if (!news) {
+            const error = new Error("خبری با این شناسه یافت نشد.")
+            error.statusCode = 404
+            throw error
+        }
+        const numViews = news.numViews + 1
+        await News.update({numViews}, {where: {id}})
+        res.status(200).json({
+            success: true,
+            news
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
+export const popularNews = async (req, res, next) => {
+    try {
+        const news = await News.findAll({
+            limit: 4,
+            order: [["numViews", "DESC"]]
+        })
+        res.status(200).json({
             success: true,
             news
         })
