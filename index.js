@@ -9,6 +9,7 @@ import fileUpload from 'express-fileupload'
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
+import newsRoutes from "./routes/newsRoutes.js";
 
 // Load Config
 dotenv.config()
@@ -36,6 +37,7 @@ try {
 app.use("/api/users", userRoutes)
 app.use("/api/category", categoryRoutes)
 app.use("/api/video", videoRoutes)
+app.use("/api/news", newsRoutes)
 
 // error handler
 app.use(errorHandler)
