@@ -171,3 +171,18 @@ export const deleteNews = async (req, res, next) => {
         next(err)
     }
 }
+
+export const lastNews = async (req, res, next) => {
+    try {
+        const news = await News.findAll({
+            limit: 2,
+            order: [["id", "DESC"]]
+        })
+        res.json({
+            success: true,
+            news
+        })
+    } catch (err) {
+        next(err)
+    }
+}

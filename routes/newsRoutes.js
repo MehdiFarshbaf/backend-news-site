@@ -1,11 +1,12 @@
 import express from "express";
 
 //controllers
-import {createNews, deleteNews, getAllNews, getNews, updateNews} from "../controllers/newsController.js";
+import {createNews, deleteNews, getAllNews, getNews, lastNews, updateNews} from "../controllers/newsController.js";
 import {verifyToken} from "../middlewares/verifyToken.js";
 
 const router = express.Router()
 
+router.get("/last-news", lastNews)
 
 router.post("/", verifyToken, createNews)
 router.get("/", getAllNews)
