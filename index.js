@@ -4,9 +4,11 @@ import db from "./config/database.js";
 import {errorHandler} from "./middlewares/errors.js";
 import cookieParser from 'cookie-parser'
 import fileUpload from 'express-fileupload'
+
 //routes
 import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import videoRoutes from "./routes/videoRoutes.js";
 
 // Load Config
 dotenv.config()
@@ -33,6 +35,7 @@ try {
 // Routes
 app.use("/api/users", userRoutes)
 app.use("/api/category", categoryRoutes)
+app.use("/api/video", videoRoutes)
 
 // error handler
 app.use(errorHandler)
