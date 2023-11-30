@@ -10,7 +10,7 @@ import userRoutes from "./routes/userRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import newsRoutes from "./routes/newsRoutes.js";
-import commentRoutes from "./routes/comentRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 // Load Config
 dotenv.config()

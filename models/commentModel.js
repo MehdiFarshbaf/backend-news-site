@@ -6,10 +6,6 @@ import News from "./newsModel.js";
 const {DataTypes} = Sequelize
 
 const Comment = db.define("comments", {
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
     newsId: {
         type: DataTypes.INTEGER,
         allowNull: false
